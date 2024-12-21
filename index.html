@@ -3510,7 +3510,7 @@
                                     <p role="status" aria-live="polite" aria-atomic="true"></p>
                                     <ul></ul>
                                 </div>
-                                <form action="" method="post" class="wpcf7-form init demo" aria-label="Contact form"
+                                <form action="mail.php" method="post" onsubmit="return sendContactForm();" class="wpcf7-form init demo" aria-label="Contact form"
                                     novalidate="novalidate" data-status="init">
                                     <div style="display: none;">
                                         <input type="hidden" name="_wpcf7" value="5" />
@@ -3526,19 +3526,19 @@
                                                         size="40" maxlength="400"
                                                         class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required textfield"
                                                         aria-required="true" aria-invalid="false" placeholder="You name"
-                                                        value="" type="text" name="text-871" /></span></label>
+                                                        value="" type="text" name="name" /></span></label>
                                             <label class="input-wrp"><i class="fontello-mail"></i><span
                                                     class="wpcf7-form-control-wrap" data-name="text-872"><input
                                                         size="40" maxlength="400"
                                                         class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required textfield"
                                                         aria-required="true" aria-invalid="false" placeholder="E-mail"
-                                                        value="" type="text" name="text-872" /></span></label>
+                                                        value="" type="text" name="email" /></span></label>
                                             <label class="input-wrp"><i class="fontello-comment"></i><span
                                                     class="wpcf7-form-control-wrap" data-name="textarea-808"><textarea
                                                         cols="10" rows="2" maxlength="2000"
                                                         class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required textfield"
-                                                        aria-required="true" aria-invalid="false" placeholder="Comment"
-                                                        name="textarea-808"></textarea></span></label>
+                                                        aria-required="true" aria-invalid="false" placeholder="Message"
+                                                        name="message"></textarea></span></label>
                                         </p>
                                         <div class="btn-wrp">
                                             <p><input
@@ -3671,6 +3671,31 @@
     </div>
     <!-- Site Back Top End -->
     <script type="text/html" id="wpb-modifications"> window.wpbCustomElement = 1; </script>
+    <script>
+        function sendContactForm() {
+            const form = document.getElementById('contactForm');
+            const formData = new FormData(form);
+        
+            fetch('mail.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                if (result === "success") {
+                    alert('Message sent successfully!');
+                } else {
+                    alert('Failed to send message. Please try again.');
+                }
+            })
+            .catch(error => {
+                alert('Error occurred: ' + error.message);
+            });
+        
+            return false; // Prevent the default form submission
+        }
+        </script>
+        
     <script type='text/javascript'>
         (function () {
             var c = document.body.className;
