@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate required fields
     if (!empty($name) && !empty($email) && !empty($message)) {
-        $to = "fel"; // Replace with your email address
+        $to = "phelyhanney@gmail.com"; // Replace with your email address
         $subject = "Contact Form Submission from $name";
         $headers = "From: $email\r\n";
         $headers .= "Reply-To: $email\r\n";
