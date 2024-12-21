@@ -3684,7 +3684,7 @@
                 if (result === "success") {
                     alert('Message sent successfully!');
                 } else {
-                    alert('Failed to send message. Please try again.');
+                    alert(error.message);
                 }
             })
             .catch(error => {
