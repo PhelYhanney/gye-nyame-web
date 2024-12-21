@@ -2313,21 +2313,14 @@
                                         <p role="status" aria-live="polite" aria-atomic="true"></p>
                                         <ul></ul>
                                     </div>
-                                    <form action="/themes/agricom/about/#wpcf7-f5-o1" method="post" class="wpcf7-form init demo" aria-label="Contact form" novalidate="novalidate" data-status="init">
-                                        <div style="display: none;">
-                                            <input type="hidden" name="_wpcf7" value="5" />
-                                            <input type="hidden" name="_wpcf7_version" value="5.9.8" />
-                                            <input type="hidden" name="_wpcf7_locale" value="en" />
-                                            <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f5-o1" />
-                                            <input type="hidden" name="_wpcf7_container_post" value="0" />
-                                            <input type="hidden" name="_wpcf7_posted_data_hash" value="" />
-                                        </div>
+                                    <form id="contactForm" action="../mail.php" class="wpcf7-form init demo" aria-label="Contact form" novalidate="novalidate" data-status="init">
+                                        
                                         <div class="f1">
-                                            <p><label class="input-wrp"><i class="fontello-user"></i><span class="wpcf7-form-control-wrap" data-name="text-871"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required textfield" aria-required="true" aria-invalid="false" placeholder="You name" value="" type="text" name="text-871" /></span></label>
+                                            <p><label class="input-wrp"><i class="fontello-user"></i><span class="wpcf7-form-control-wrap" data-name="text-871"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required textfield" aria-required="true" aria-invalid="false" placeholder="Your name" value="" type="text" name="name" /></span></label>
                                                 <label
-                                                    class="input-wrp"><i class="fontello-mail"></i><span class="wpcf7-form-control-wrap" data-name="text-872"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required textfield" aria-required="true" aria-invalid="false" placeholder="E-mail" value="" type="text" name="text-872" /></span></label>
+                                                    class="input-wrp"><i class="fontello-mail"></i><span class="wpcf7-form-control-wrap" data-name="text-872"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required textfield" aria-required="true" aria-invalid="false" placeholder="E-mail" value="" type="text" name="email" /></span></label>
                                                     <label
-                                                        class="input-wrp"><i class="fontello-comment"></i><span class="wpcf7-form-control-wrap" data-name="textarea-808"><textarea cols="10" rows="2" maxlength="2000" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required textfield" aria-required="true" aria-invalid="false" placeholder="Comment" name="textarea-808"></textarea></span></label>
+                                                        class="input-wrp"><i class="fontello-comment"></i><span class="wpcf7-form-control-wrap" data-name="textarea-808"><textarea cols="10" rows="2" maxlength="2000" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required textfield" aria-required="true" aria-invalid="false" placeholder="Message" name="message"></textarea></span></label>
                                             </p>
                                             <div class="btn-wrp">
                                                 <p><input class="wpcf7-form-control wpcf7-submit has-spinner custom-btn long" type="submit" value="Send a message" />
@@ -2408,19 +2401,12 @@
                                         <p role="status" aria-live="polite" aria-atomic="true"></p>
                                         <ul></ul>
                                     </div>
-                                    <form action="" method="post" class="wpcf7-form init demo" aria-label="Contact form" novalidate="novalidate" data-status="init">
-                                        <div style="display: none;">
-                                            <input type="hidden" name="_wpcf7" value="122" />
-                                            <input type="hidden" name="_wpcf7_version" value="5.9.8" />
-                                            <input type="hidden" name="_wpcf7_locale" value="en" />
-                                            <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f122-o2" />
-                                            <input type="hidden" name="_wpcf7_container_post" value="0" />
-                                            <input type="hidden" name="_wpcf7_posted_data_hash" value="" />
-                                        </div>
+                                    <form  method="post" class="wpcf7-form init demo" aria-label="Contact form" novalidate="novalidate" data-status="init">
+                                        
                                         <div class="form-horizontal">
                                             <div class="b-table">
                                                 <div class="cell v-bottom">
-                                                    <p><label class="input-wrp"><i class="fontello-mail"></i><span class="wpcf7-form-control-wrap" data-name="text-727"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required textfield" aria-required="true" aria-invalid="false" placeholder="E-mail" value="" type="text" name="text-727" /></span></label>
+                                                    <p><label class="input-wrp"><i class="fontello-mail"></i><span class="wpcf7-form-control-wrap" data-name="text-727"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required textfield" aria-required="true" aria-invalid="false" placeholder="E-mail" value="" type="text" name="email" /></span></label>
                                                     </p>
                                                 </div>
                                                 <div class="cell v-bottom">
@@ -2446,6 +2432,30 @@
         <a id="btn-to-top" class="circled" href="javascript:void(0);" data-visible-offset="1000"></a>
     </div>
     <!-- Site Back Top End -->
+    <script>
+        function sendContactForm() {
+            const form = document.getElementById('contactForm');
+            const formData = new FormData(form);
+        
+            fetch('mail.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                if (result === "success") {
+                    alert('Message sent successfully!');
+                } else {
+                    alert('Failed to send message. Please try again.');
+                }
+            })
+            .catch(error => {
+                alert('Error occurred: ' + error.message);
+            });
+        
+            return false; // Prevent the default form submission
+        }
+        </script>
     <script type="text/html" id="wpb-modifications"> window.wpbCustomElement = 1; </script>
     <script type='text/javascript'>
         (function() {
